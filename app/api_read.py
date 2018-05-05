@@ -1,1 +1,1 @@
-from app import appgit
+from app import app
