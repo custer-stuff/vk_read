@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% if title %}
+    <title>{{ title }} - VK Read</title>
+    {% else %}
+    <title>Welcome to VK Read!</title>
+    {% endif %}
+</head>
+<body>
+    {% extends "base.html" %}
+
+    {% block content %}
+
+    <h1>current message id is: {{ message_id.message_id}}</h1>
+    {% for message_body in message_bodies %}
+    <div><p> Message: {{message_body.author.username}} : <b>{{message_body.body}}</b></p></div>
+    {% endfor %}
+    {% endblock %}
+</body>
+</html>
