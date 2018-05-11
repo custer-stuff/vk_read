@@ -1,33 +1,7 @@
-{% extends "index.html" %}
+{% extends "main.html" %}
 
 {% block content %}
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.msg_id.label }}
-            {{ form.msg_id(size=18) }}
-            {% for error in form.msg_id.errors %}
-            <span style="color:red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.lenght.label }}
-            {{ form.lenght(size=5) }}
-            {% for error in form.lenght.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-        </p>
-        <p>{{ form.submit() }}</p>
+    <form>
+<h1>qweqweqweqweqweqweq</h1>
     </form>
 {% endblock %}
