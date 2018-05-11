@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "index.html" %}
 
 {% block content %}
     <h1>Sign In</h1>
@@ -19,7 +19,7 @@
             {% endfor %}
         </p>
         <p>
-            {{ form.remember_me() }} {{ form.remember_me.label }}
+
         </p>
         <p>{{ form.submit() }}</p>
     </form>
