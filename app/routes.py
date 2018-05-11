@@ -9,7 +9,9 @@ from app.forms import SomeForm
 def index():
     form = SomeForm()
     if form.validate_on_submit():
-        flash('Get message for message_id {}'.format(
-            form.username.data))
+        flash('Get message for message_id: {}'.format(
+            form.msg_id.data))
+        flash('length is: {}'.format(
+            form.lenght.data))
         return redirect(url_for('index'))
-    return render_template('login.html', title='Main', form=form)
+    return render_template('main.html', title='Main', form=form)
