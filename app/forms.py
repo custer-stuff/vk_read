@@ -3,11 +3,10 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, Integ
 from wtforms.validators import DataRequired
 
 
-
 class SomeForm(FlaskForm):
     msg_id = IntegerField('msg_id')
     # , validators=[IntegerField()]
-    lenght = IntegerField('lenght')
-    #remember_me = BooleanField('Remember Me ')
+    length = IntegerField('length')
+    # remember_me = BooleanField('Remember Me ')
     submit = SubmitField('Get')
     msg_text = StringField('msg_text')

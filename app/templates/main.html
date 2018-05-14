@@ -10,13 +10,15 @@
             <span style="color:red;">[{{ error }}]</span>
             {% endfor %}
         </p>
+        {# тут будет поле для указания длинны цепочки сообщений
         <p>
-            {{ form.lenght.label }}
-            {{ form.lenght(size=5) }}
+            {{ form.length.label }}
+            {{ form.length(size=5) }}
             {% for error in form.lenght.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
+         #}
         <p>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -34,10 +36,11 @@
         <hr>
         <h3>Response:</h3>
         <p>
-            {{ form.msg_text.label }}
+            <b>{{ form.msg_text.label }}:</b>
+
+                {{ response }}
+
+            <h1>Hello, {{ user_id }}!</h1>
         </p>
     </form>
 {% endblock %}
-
-
-
