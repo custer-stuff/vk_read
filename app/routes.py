@@ -26,8 +26,17 @@ def index():
 
         query = "{domain}/messages.getById?message_ids={message_ids}&user_id={user_id}&access_token={" \
                 "access_token}&v=5.53".format(**query_params)
-        response = requests.get(query).json()
-        return render_template('main.html', title='Main', form=form, response=response, user_id=user_id)
+        msg_body = requests.get(query).json()
+
+        data = json.dumps(msg_body)
+        obj0 = json.loads(data)
+        obj1 = (obj0["response"])
+        obj2 = (obj1["items"])
+        obj3 = (obj2[0])
+        msg_text = (obj3["body"])
+
+        return render_template('main.html', title='Main', form=form, msg_body=msg_body, user_id=user_id,
+                               msg_text=msg_text)
 
     if form.validate_on_submit():
         flash('Get message for message_id: {}'.format(

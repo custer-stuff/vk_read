@@ -9,4 +9,5 @@ class SomeForm(FlaskForm):
     length = IntegerField('length')
     # remember_me = BooleanField('Remember Me ')
     submit = SubmitField('Get')
+    msg_body = StringField('msg_body')
     msg_text = StringField('msg_text')
