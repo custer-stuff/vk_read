@@ -5,6 +5,7 @@ from app.forms import SomeForm
 import requests
 import json
 from config import Config
+import re
 
 
 @app.route('/')
@@ -28,15 +29,24 @@ def index():
                 "access_token}&v=5.53".format(**query_params)
         msg_body = requests.get(query).json()
 
-        data = json.dumps(msg_body)
-        obj0 = json.loads(data)
-        obj1 = (obj0["response"])
-        obj2 = (obj1["items"])
-        obj3 = (obj2[0])
-        msg_text = (obj3["body"])
+        # data = json.dumps(msg_body)
+        # obj0 = json.loads(data)
+        # obj1 = (obj0["response"])
+        # obj2 = (obj1["items"])
+        # obj3 = (obj2[0])
+
+        msg_text = ((((json.loads(json.dumps(msg_body))["response"])["items"])[0])["body"])
+
+        try:
+            msg_attachments = ((((((json.loads(json.dumps(msg_body))["response"])["items"])[0])["attachments"])[0])[
+                'photo'])
+        except KeyError:
+            msg_attachments = 'Медиа-вложений нет'
+
+        # img_links = re.search(r'photo_', msg_attachments)
 
         return render_template('main.html', title='Main', form=form, msg_body=msg_body, user_id=user_id,
-                               msg_text=msg_text)
+                               msg_text=msg_text, msg_attachments=msg_attachments)
 
     if form.validate_on_submit():
         flash('Get message for message_id: {}'.format(
