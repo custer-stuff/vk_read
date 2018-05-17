@@ -18,6 +18,9 @@ def index():
     user_id = Config.USER_ID
 
     if form.validate_on_submit():
+        flash('Get message for message_id: {}'.format(
+            form.msg_id.data))
+
         query_params = {
             'domain': domain,
             'access_token': access_token,
@@ -35,13 +38,20 @@ def index():
         # obj2 = (obj1["items"])
         # obj3 = (obj2[0])
 
-        msg_text = ((((json.loads(json.dumps(msg_body))["response"])["items"])[0])["body"])
+        try:
+            msg_text = ((((json.loads(json.dumps(msg_body))["response"])["items"])[0])["body"])
+        except KeyError:
+            msg_text = 'чет ошибка какая-то'
 
         try:
             msg_attachments = ((((((json.loads(json.dumps(msg_body))["response"])["items"])[0])["attachments"])[0])[
                 'photo'])
         except KeyError:
-            msg_attachments = 'Медиа-вложений нет'
+            try:
+                msg_attachments = ((((((json.loads(json.dumps(msg_body))["response"])["items"])[0])["attachments"])[0])[
+                    'video'])
+            except KeyError:
+                msg_attachments = 'Медиа-вложений нет'
 
         # img_links = re.search(r'photo_', msg_attachments)
 
