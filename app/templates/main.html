@@ -36,11 +36,15 @@
         <hr>
         <h3>Response:</h3>
         <p>
+            {# весь JSON-объект
             <b>{{ form.msg_body.label }}:</b>
                 {{ msg_body }}
-            <br>
+            #}
             <b>{{ form.msg_text.label }}:</b>
                 {{ msg_text }}
+                        <br>
+            <b>{{ form.msg_attachments.label }}:</b>
+                {{ msg_attachments }}
         </p>
     </form>
 {% endblock %}

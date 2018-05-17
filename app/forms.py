@@ -11,3 +11,4 @@ class SomeForm(FlaskForm):
     submit = SubmitField('Get')
     msg_body = StringField('msg_body')
     msg_text = StringField('msg_text')
+    msg_attachments = StringField('msg_attachments')
