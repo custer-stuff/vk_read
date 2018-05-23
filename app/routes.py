@@ -30,26 +30,29 @@ def index():
 
         query = "{domain}/messages.getById?message_ids={message_ids}&user_id={user_id}&access_token={" \
                 "access_token}&v=5.53".format(**query_params)
-        msg_body = requests.get(query).json()
 
-        # data = json.dumps(msg_body)
-        # obj0 = json.loads(data)
-        # obj1 = (obj0["response"])
-        # obj2 = (obj1["items"])
-        # obj3 = (obj2[0])
+        # Ответ от api представляет из себя структуру со много-уровневым вложением. #
+        # Нас интересует первый элемент из объекта "items", тк он и будет являться текстом сообщения #
+        # Код ниже занимается выгрузкой из ответа api первого элемента объекта "items" #
+
+        msg_body = requests.get(query).json()
+        data = json.dumps(msg_body)
+        data_loaded = json.loads(data)
+        data_response = (data_loaded["response"])
+        data_item = (data_response["items"])
+        data_first_item = (data_item[0])
 
         try:
-            msg_text = ((((json.loads(json.dumps(msg_body))["response"])["items"])[0])["body"])
+            msg_text = (data_first_item["body"])
         except KeyError:
             msg_text = 'чет ошибка какая-то'
 
+        # Ищем медиа-вложения в ответе. проверяя - есть ли в объекте "items" вложения типа "photo","video"
         try:
-            msg_attachments = ((((((json.loads(json.dumps(msg_body))["response"])["items"])[0])["attachments"])[0])[
-                'photo'])
+            msg_attachments = (((data_first_item["attachments"])[0])['photo'])
         except KeyError:
             try:
-                msg_attachments = ((((((json.loads(json.dumps(msg_body))["response"])["items"])[0])["attachments"])[0])[
-                    'video'])
+                msg_attachments = (((data_first_item["attachments"])[0])['video'])
             except KeyError:
                 msg_attachments = 'Медиа-вложений нет'
 
